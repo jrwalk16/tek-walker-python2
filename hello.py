@@ -10,3 +10,7 @@ app = Flask(__name__)
 def index():
     return render_template('basic.html')
 
+@app.route('/puppies')
+
+def puppies():
+    return render_template('puppies.html')
