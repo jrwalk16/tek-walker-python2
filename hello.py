@@ -14,3 +14,8 @@ def index():
 
 def puppies():
     return render_template('puppies.html')
+
+@app.route('/owners')
+
+def owners():
+     return render_template('owners.html')
