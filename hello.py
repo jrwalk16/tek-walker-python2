@@ -15,6 +15,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///puppies.db'
 
+
 db = SQLAlchemy(app)
 
 class Dogs(db.Model):
@@ -82,13 +83,20 @@ def puppy():
 
 @app.route('/owners',methods=['GET','POST'])
 def owner():
-    form = OwnerForm()
+    first_name = None
+    last_name = None
+    form = DbOwnerForm()
     if form.validate_on_submit():
-        session['owner_name'] = form.owner_name.data
+        owner = Owners(first_name=form.first_name.data, last_name=form.last_name.data)
+        db.session.add(owner)
+        db.session.commit()
+    first_name = form.first_name.data
+    last_name = form.last_name.data
+    form.first_name.data = ''
+    form.last_name.data = ''
 
-        return redirect(url_for('thankyou'))
-
-    return render_template('owner.html', form=form)
+    our_owners = Owners.query.order_by(Owners.id)
+    return render_template('owner.html', form=form, first_name=first_name, last_name=last_name, our_owners=our_owners)
 
 @app.route('/thankyou')
 def thankyou():

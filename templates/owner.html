@@ -3,10 +3,20 @@
 
 {% block content %}
 <h1>Enter owner information</h1>
+
+
 <form method="POST">
     {{ form.hidden_tag() }}
-    {{form.owner_name.label}}{{form.owner_name()}}</br>
+    {{form.first_name.label}}{{form.first_name()}}</br>
+    {{form.last_name.label}}{{form.last_name()}}
     {{form.submit()}}
 </form>
+
+<br/><br/><br/>
+
+{% for our_owner in our_owners%}
+    {{ our_owner.id }}.  {{ our_owner.first_name}} - {{ our_owner.last_name}}<br/>
+
+{% endfor %}
 
 {% endblock %}
