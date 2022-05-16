@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<h1>Enter puppy information</h1>
+<h1>Puppy List:</h1>
 
 
 
@@ -12,4 +12,13 @@
     {{form.breed.label}}{{form.breed()}}
     {{form.submit()}}
 </form>
+
+
+
+<br/><br/><br/>
+
+{% for our_dog in our_dogs%}
+    {{ our_dog.id }}.  {{ our_dog.name}} - {{ our_dog.breed}}<br/>
+
+{% endfor %}
 {% endblock %}
