@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Enter owner information</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{form.owner_name.label}}{{form.owner_name()}}</br>
+    {{form.submit()}}
+</form>
+
+{% endblock %}
