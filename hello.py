@@ -9,6 +9,7 @@ from wtforms import StringField,SubmitField
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from wtforms.validators import DataRequired
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
@@ -32,6 +33,15 @@ class DbPuppyForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
+class Owners(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(200), nullable=False)
+    last_name = db.Column(db.String(200), nullable=False)
+
+class DbOwnerForm(FlaskForm):
+    first_name = StringField("Owner First Name", validators=[DataRequired()])
+    last_name = StringField("Owner Last Name", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 @app.route('/')
